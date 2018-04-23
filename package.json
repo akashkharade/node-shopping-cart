@@ -12,7 +12,6 @@
     "restful",
     "api"
   ],
-  "author": "Maximilian Schwarzmüller",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
