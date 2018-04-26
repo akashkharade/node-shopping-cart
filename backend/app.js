@@ -3,12 +3,10 @@ const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 
-const productRoutes = require("./api/routes/products");
-const orderRoutes = require("./api/routes/orders");
 const mongdb = require('./db/mongDB');
 const apiRouterConfigure = require('./api/configRourer');
 var db = new mongdb();
-//db.init();
+db.init();
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -44,6 +42,9 @@ app.use((error, req, res, next) => {
     }
   });
 });
+
+
+
 /*
 const PORT = process.env.PORT || 5000 ;
 app.listen(PORT);

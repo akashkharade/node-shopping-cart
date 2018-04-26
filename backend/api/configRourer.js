@@ -1,11 +1,17 @@
 
-var apiRouter = require('./api');
-const productRoutes = require("./routes/products");
-const orderRoutes = require("./routes/orders");
+var API = require('./API');
+const ProductsAPI = require("./enpoints/ProductsAPI");
+const OrdersAPI = require("./enpoints/OrdersAPI");
+const CatalogAPI = require("./enpoints/CatalogAPI");
+const UserAPI = require("./enpoints/UserAPI");
 
 
 var config = [
-    {path:'/api', router:apiRouter},{path:"/products", router:productRoutes},{path:"/orders", router:orderRoutes}
+    {path:'/api', router:API},
+    {path:"/api/products", router:ProductsAPI},
+    {path:"/api/orders", router:OrdersAPI},
+    {path:"/api/catalogs", router:CatalogAPI},
+    {path:"/api/users", router:UserAPI}
 ];
 
 var apiRouterConfigure = function(app){

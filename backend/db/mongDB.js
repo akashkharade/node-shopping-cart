@@ -1,13 +1,15 @@
 var mongoose   = require('mongoose');
 var config = require('../config/appConfig');
-var userModel  =  require('../model/User');
 function MongoDB(){
-  this.user = null;
 }
 
 MongoDB.prototype.init = function(){
-    mongoose.connect(config.db.connection);
-    this.user =  mongoose.model('user', userModel);
+    var MongoDB = mongoose.connect(config.db.connection).connection;;
+  /*  MongoDB.on('error', function(err) { console.log(err.message); });
+    MongoDB.once('open', function() {
+      console.log("mongodb connection open");
+    });*/
+  
 }
 
 module.exports = MongoDB;
