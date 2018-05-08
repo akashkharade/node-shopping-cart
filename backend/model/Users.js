@@ -1,6 +1,21 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose ;
 
+const productSchema = new Schema({
+    name : String,
+    description: String,
+    imgSrc : String,
+    isAvailable : Boolean,
+    price : Number
+});
+
+const orderSchema = new Schema({
+    quntity : { type : Number, default : 0},
+    total_price : Number,
+    products : [productSchema],
+    createdOn : {type : Date, default : Date.now}
+});
+
 const Users = new Schema({
     username : String,
     password : String,
@@ -9,8 +24,8 @@ const Users = new Schema({
     userImgSrc : String,
     email : String,
     wallet_balance : Number,
-    orders : [],
-    address : []
+    orders : [orderSchema],
+    address : String
 
 });
 
