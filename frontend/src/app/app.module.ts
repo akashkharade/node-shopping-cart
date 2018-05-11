@@ -3,14 +3,17 @@ import { NgModule } from '@angular/core';
 import {ApiInfoService} from './ApiInfoService';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
+import { RegisterComponent } from './register/register.component';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RegisterComponent
   ],
   imports: [
-    BrowserModule,HttpModule
+    BrowserModule,HttpModule,FormsModule
   ],
   providers: [ApiInfoService],
   bootstrap: [AppComponent]

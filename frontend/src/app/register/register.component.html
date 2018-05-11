@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+    Register Here</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Registeration</h4>
+        </div>
+        <div class="modal-body">
+          <form #userForm="ngForm" (ngSubmit)="saveUser(user)">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">User Registeration</h3>
+              </div>
+          
+              <div class="panel-body">
+                <div class="form-group" [class.has-error]="firstNameControl.invalid" [class.has-success]="firstNameControl.valid"> 
+                  <label for="firstName">First Name</label> 
+                  <input required id="firstName"
+                    name="firstName" [(ngModel)]="user.firstName" type="text"
+                    class="form-control" #firstNameControl="ngModel">
+                    <span class="help-block" *ngIf="firstNameControl.invalid && firstNameControl.touched">
+                      First Name is required
+                    </span>
+                </div>
+                <div class="form-group" [class.has-error]="lastNameControl.invalid" [class.has-success]="lastNameControl.valid">
+                  <label for="lastName">Last Name</label> 
+                  <input required id="lastName"
+                    name="lastName" [(ngModel)]="user.lastName" type="text"
+                    class="form-control" #lastNameControl="ngModel">
+                  <span class="help-block" *ngIf="lastNameControl.invalid && lastNameControl.touched">
+                      Last Name is required
+                  </span>
+                </div>
+
+                <div class="form-group" [class.has-error]="emailControl.invalid" [class.has-success]="emailControl.valid">
+                  <label for="email">Email</label> 
+                  <input required [email]="user.email!==''" id="email" name="email"
+                    [(ngModel)]="user.email" type="text" class="form-control" #emailControl="ngModel">
+                    <span class="help-block" *ngIf="emailControl.errors?.required && emailControl.touched">
+                      Email is required
+                  </span>
+                  <span class="help-block" *ngIf="emailControl.errors?.email && emailControl.touched">
+                    Email is Invalid
+                </span>
+                </div>
+                <div class="form-group" [class.has-error]="usernameControl.invalid" [class.has-success]="usernameControl.valid">
+                  <label for="username">Username</label> 
+                  <input required id="username" name="username"
+                    [(ngModel)]="user.username" type="text" class="form-control" #usernameControl="ngModel">
+                    <span class="help-block" *ngIf="usernameControl.invalid && usernameControl.touched">
+                      Username is required
+                  </span>
+                </div>
+                <div class="form-group" [class.has-error]="passwordControl.invalid" [class.has-success]="passwordControl.valid">
+                  <label for="password">Password</label> 
+                  <input required id="password" name="password"
+                    [(ngModel)]="user.password" type="password" class="form-control" #passwordControl="ngModel">
+                    <span class="help-block" *ngIf="passwordControl.invalid && passwordControl.touched">
+                      Password is required
+                  </span>
+                </div>
+              
+              
+             
+              </div>
+              <div class="panel-footer">
+                <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Save</button>
+          
+          
+              </div>
+            </div>
+          </form>
+          
+          Angular Generated Form module: {{userForm.value | json}}
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+</body>
+</html>
