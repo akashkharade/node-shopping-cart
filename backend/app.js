@@ -8,6 +8,10 @@ const apiRouterConfigure = require('./api/configRourer');
 var db = new mongdb();
 db.init();
 
+
+//register models
+require('./model/User');
+
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -27,6 +31,7 @@ app.use((req, res, next) => {
 
 // Routes which should handle requests
 apiRouterConfigure(app);
+require('./api/enpoints/OrdersAPI')(app);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");
@@ -42,8 +47,6 @@ app.use((error, req, res, next) => {
     }
   });
 });
-
-
 
 /*
 const PORT = process.env.PORT || 5000 ;
