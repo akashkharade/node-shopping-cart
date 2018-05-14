@@ -93,6 +93,7 @@ router.get('/:userid', (req, res, next) => {
 });
 
 router.post('/registeration', (req, res, next) => {
+	console.log("registeration called..");
     var users = User({
       username: req.body.username,
         password: req.body.password,

@@ -4,7 +4,8 @@ import {ApiInfoService} from './ApiInfoService';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule} from '@angular/forms'; 
+import { RegisterService } from './register/register.service';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import {FormsModule} from '@angular/forms';
   imports: [
     BrowserModule,HttpModule,FormsModule
   ],
-  providers: [ApiInfoService],
+  providers: [ApiInfoService,RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
