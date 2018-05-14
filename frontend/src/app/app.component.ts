@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiInfoService } from './ApiInfoService';
-import {ApiInfo} from './ApiInfo';
-
+import { AuthService } from './auth.service';
+import { UserService } from './user.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,23 +9,17 @@ import {ApiInfo} from './ApiInfo';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private apiInfo:ApiInfo = new  ApiInfo("","");
-  constructor(  private apiService: ApiInfoService ){
-    this.apiInfo = new  ApiInfo("","");
+  constructor(private userService: UserService, public auth: AuthService, router: Router) {
+//    auth.user$.subscribe(user => {
+//      if (!user) return;
+//
+//      userService.save(user);
+//
+//      let returnUrl = localStorage.getItem('returnUrl');
+//      if (!returnUrl) return;
+//
+//      localStorage.removeItem('returnUrl');
+//      router.navigateByUrl(returnUrl);
+//    });
   }
-
-  ngOnInit() {
-    // Load comments
-    this.loadAPIInfo()
-  }
-
-  loadAPIInfo(){
-    this.apiService.getAPInfo().subscribe(apinfo => {
-      console.log("loadAPIInfo  ",apinfo);
-      this.apiInfo =  apinfo;
-
-    });
-  }
-
-  title = 'app';
 }

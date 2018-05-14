@@ -13,6 +13,9 @@ export class ApiInfoService {
     }
 
     getAPInfo(): Observable<ApiInfo>{
-     return  this.http.get(AppConfig.BASE_URL+"/api").map((res:Response) => res.json());   
+      
+      let cc = this.http.get(AppConfig.BASE_URL+"/api").map((res:Response) => res.json());
+      console.log(cc);
+     return  cc;
     }
 }
