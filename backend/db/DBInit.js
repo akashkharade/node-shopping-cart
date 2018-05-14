@@ -1,27 +1,31 @@
 var products = [
 {
-    name:"tv",
+    name:"samsung",
+	category:"tv",
     imgName:"",
     describtion:"",
     price:6500
 
 },
 {
-    name:"Mobile",
+    name:"MotoG",
+	category:"mobile",
     imgName:"",
     describtion:"",
     price:2500
 
 },
 {
-    name:"Tshirts",
+    name:"polp Tshirts",
+	category:"garments",
     imgName:"",
     describtion:"",
     price:1500
 
 },
 {
-    name:"Toy",
+    name:"car",
+	category:"toy",
     imgName:"",
     describtion:"",
     price:400

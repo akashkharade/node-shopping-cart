@@ -3,6 +3,7 @@ var router = express.Router();
 var DBinit = require('../db/DBInit');
 var db = require('../db/mongDB');
 var Products = require('../model/Products');
+var mongoose     = require('mongoose');
 
 router.get('/', (req, res, next) => {
   var apiInfo = {
@@ -14,11 +15,13 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/reset', (req, res, next) => {
+  mongoose.connection.db.dropCollection('Product', function(err, result) {console.log("error deleting ")});
   var products = DBinit.products;
   for(var i=0; i<products.length; i++){
     var p = products[i];
     var product = Products({
       name: p.name,
+	  category: p.category,
       imgName:p.imgName,
       describtion:p.describtion,
       price:p.price
