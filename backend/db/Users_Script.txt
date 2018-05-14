@@ -1,0 +1,51 @@
+{ 
+    "_id" : ObjectId("5adf0a6309f2031f88a19db0"), 
+    "orders" : [
+
+    ], 
+    "address" : [
+
+    ], 
+    "username" : "akash", 
+    "password" : "pass", 
+    "firstName" : "akash", 
+    "lastname" : "kharade", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5af2bc34b6daa61cdc2a3414"), 
+    "orders" : [
+
+    ], 
+    "address" : [
+
+    ], 
+    "username" : "jayesh", 
+    "password" : "pass", 
+    "email" : "jayesh@ness.com", 
+    "wallet_balance" : NumberInt(100), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5af56cc9f7661017504f4687"), 
+    "username" : "pratik", 
+    "password" : "pass", 
+    "email" : "pratik@ness.com", 
+    "wallet_balance" : NumberInt(100), 
+    "orders" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5af963749d983121e8df2fb9"), 
+    "username" : "neha@123", 
+    "password" : "hjhjj", 
+    "firstName" : "neha", 
+    "email" : "neha.mishra@pearson.com", 
+    "wallet_balance" : NumberInt(100), 
+    "orders" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
