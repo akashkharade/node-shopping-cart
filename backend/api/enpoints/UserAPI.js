@@ -63,7 +63,31 @@ router.post('/login', (req, res, next) => {
     
     
 });
+router.get('/:userid/wallet', (req, res, next) => {
+	const id = req.params.userId;
+	User.findById(id, function (err, user) {
+		if (!err) {
+			res.status(200).json(user.wallet_balance);
+		} else {
+			return console.log(err);
+		}
+	});
+});
 
+router.put('/:userid/wallet', (req, res, next) => {
+	var walletAmount=req.body.walletAmount;
+	const id = req.params.userId;
+	User.findById(id, function (err, user) {
+		user.wallet_balance = walletAmount;
+		if (!err) {
+			User.findByIdAndUpdate(id, user, {new: true}, function(err, model) {
+				res.status(200).json(model.wallet_balance);
+			});
+		} else {
+			return console.log(err);
+		}
+	});
+});
 router.get('/:userid', (req, res, next) => {
    
 	const id = req.params.userId;

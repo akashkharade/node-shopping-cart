@@ -15,8 +15,11 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/reset', (req, res, next) => {
-  mongoose.connection.db.dropCollection('Product', function(err, result) {console.log("error deleting ")});
-  var products = DBinit.products;
+ // mongoose.connection.db.dropCollection('Product', function(err, result) {console.log("error deleting ")});
+ Products.remove({}, function(err) { 
+  console.log('collection removed') 
+}); 
+ var products = DBinit.products;
   for(var i=0; i<products.length; i++){
     var p = products[i];
     var product = Products({

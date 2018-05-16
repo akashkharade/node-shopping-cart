@@ -15,4 +15,12 @@ router.get('/', (req, res, next) => {
     });
     
 });
+
+router.get('/categories', (req, res, next) => {
+    var catalog = null;
+    Products.find().distinct('category', function(error, categories) {
+        res.status(200).json(categories);
+    });  
+    
+});
 module.exports = router;
