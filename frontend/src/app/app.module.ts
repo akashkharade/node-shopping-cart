@@ -10,8 +10,7 @@ import {ApiInfoService} from './ApiInfoService';
 import { RegisterComponent } from './register/register.component';
 import {FormsModule} from '@angular/forms'; 
 import { RegisterService } from './register/register.service';
-
-
+import { LoginService } from "./login/login.service";
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
@@ -26,6 +25,8 @@ import { LoginComponent } from './login/login.component';
 import { ProductService } from './product.service';
 import { UserService } from './user.service';
 import { HttpModule } from '@angular/http';
+
+
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { HttpModule } from '@angular/http';
       {path: '', component: ProductsComponent},
       {path: 'products', component: ProductsComponent},
       {path: 'login', component: LoginComponent},
-
+      {path: 'register', component: RegisterComponent},
       {path: 'user-orders', component: UserOrdersComponent, canActivate: [AuthGuard]},
       {path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard]},
       {path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard]}
@@ -65,7 +66,8 @@ import { HttpModule } from '@angular/http';
     UserService,
     CategoryService,
     ProductService,
-    RegisterService
+    RegisterService,
+    LoginService
   ],
 
   bootstrap: [AppComponent]

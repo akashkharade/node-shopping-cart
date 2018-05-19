@@ -12,7 +12,9 @@
 		<ul class="navbar-nav mr-auto">
 			<ng-template #anonymousUser>
 				<li class="nav-item">
-					<a class="nav-link" routerLink="/login">Login</a>
+
+					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+						Login</button>
 				</li>
 			</ng-template>
 			<li ngbDropdown *ngIf="auth.user$ | async as user; else anonymousUser" class="nav-item dropdown">
@@ -30,3 +32,63 @@
 		</ul>
 	</div>
 </nav>
+
+ <!-- Modal -->
+ <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+      
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+        
+          <form #userForm="ngForm" (ngSubmit)="login(user)">
+            
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">User Login</h3>
+              </div>
+          
+              <div class="panel-body">
+
+                <div class="form-group" [class.has-error]="usernameControl.invalid" [class.has-success]="usernameControl.valid">
+                  <label for="username">Username</label> 
+                  <input required id="username" name="username"
+                    [(ngModel)]="user.username" type="text" class="form-control" #usernameControl="ngModel">
+                    <span class="help-block" *ngIf="usernameControl.invalid && usernameControl.touched">
+                      Username is required
+                  </span>
+                </div>
+                
+                <div class="form-group" [class.has-error]="passwordControl.invalid" [class.has-success]="passwordControl.valid">
+                  <label for="password">Password</label> 
+                  <input required id="password" name="password"
+                    [(ngModel)]="user.password" type="password" class="form-control" #passwordControl="ngModel">
+                    <span class="help-block" *ngIf="passwordControl.invalid && passwordControl.touched">
+                      Password is required
+                  </span>
+                </div>
+              </div>
+              
+              <div class="panel-footer">
+                <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Login</button>
+                <a [routerLink]="['/register']" class="btn btn-link" data-dismiss="modal">Register</a>
+              </div>
+            </div>
+          </form>
+          
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>  <!-- end of div model content -->
+    </div>  <!-- end of div model dialog -->
+  </div>  <!-- end of div model fade -->
+
+
