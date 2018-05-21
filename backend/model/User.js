@@ -12,8 +12,7 @@ const productSchema = new Schema({
 const orderSchema = new Schema({
     quntity : { type : Number, default : 0},
     total_price : Number,
-    products : [productSchema],
-    createdOn : {type : Date, default : Date.now}
+    products : [productSchema]
 });
 
 const userSchema = new Schema({
