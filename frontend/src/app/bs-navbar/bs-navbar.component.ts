@@ -3,6 +3,8 @@ import { User } from '../models/user.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
+import { RegisterService } from '../register/register.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'bs-navbar',
@@ -12,6 +14,8 @@ import { LoginService } from '../login/login.service';
 export class BsNavbarComponent {
 
   returnUrl: string;
+  error:string;
+  
 
   user: User = {
     username: null,
@@ -23,7 +27,7 @@ export class BsNavbarComponent {
     wallet_balance: null
 };
 
-  constructor( private log: LoginService, public auth: AuthService) {
+  constructor( public log: LoginService, public auth: AuthService,public register_service: RegisterService) {
   }
 
   login(newUser: User) {
@@ -36,6 +40,11 @@ export class BsNavbarComponent {
         console.log("reason", reason);
       }
     );*/
+  }
+
+
+  saveUser(newUser: User) {
+    this.register_service.saveUserIntoDB(newUser);
   }
 
   logout() {
