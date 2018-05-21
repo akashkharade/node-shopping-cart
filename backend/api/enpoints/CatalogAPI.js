@@ -18,8 +18,16 @@ router.get('/', (req, res, next) => {
 
 router.get('/categories', (req, res, next) => {
     var catalog = null;
-    Products.find().distinct('category', function(error, categories) {
-        res.status(200).json(categories);
+    Products.find().distinct('category', function(error, categoriesArg) {
+		var json = {
+			categories:[]
+		};
+		for(var i =0; i < categoriesArg.length; i++){
+			json.categories.push({
+				name:categoriesArg[i]
+			});
+		}
+        res.status(200).json(json);
     });  
     
 });
