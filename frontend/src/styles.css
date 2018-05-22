@@ -1,3 +1,6 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
-body { padding-top: 80px; }
+.container 
+{ 
+	margin-left: 20px !important;
+}

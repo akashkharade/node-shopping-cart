@@ -28,7 +28,7 @@ export class BsNavbarComponent {
     wallet_balance: null
 };
 
-  constructor( public log: LoginService, public auth: AuthService,public register_service: RegisterService) {
+  constructor( public log: LoginService, public authService: AuthService,public register_service: RegisterService) {
   }
 
   login(newUser: User) {
@@ -37,10 +37,13 @@ export class BsNavbarComponent {
     this.log.login(newUser).subscribe((user) => {
       console.log(user);
       this.user = user;
+      this.authService.login(newUser);
     }, (err) => {
       console.log("=============" + err);
       this.errorMessage = "Invalid Login Credentials...";
+      
     });
+  
   }
 
 
@@ -49,7 +52,7 @@ export class BsNavbarComponent {
   }
 
   logout() {
-    this.auth.logout();
+    this.authService.logout();
   }
 
 }

@@ -25,6 +25,8 @@ import { LoginComponent } from './login/login.component';
 import { ProductService } from './product.service';
 import { UserService } from './user.service';
 import { HttpModule } from '@angular/http';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './products/product-card/product-card.component';
 
 
 
@@ -39,7 +41,9 @@ import { HttpModule } from '@angular/http';
     CheckOutComponent,
     OrderSuccessComponent,
     UserOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFilterComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,

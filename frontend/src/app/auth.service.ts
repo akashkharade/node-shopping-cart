@@ -8,16 +8,19 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AuthService {
 
-  user$: Observable<User>;
+  user$: User;
 
   constructor( private route: ActivatedRoute,// private afAuth: AngularFireAuth
   ) {
     //this.user$ = afAuth.authState;
   }
 
-  login() {
+  login(user:User) {
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     localStorage.setItem('returnUrl', returnUrl);
+
+    this.user$ = user;
+    console.log("************************"+ user.username);
     //this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }
 
