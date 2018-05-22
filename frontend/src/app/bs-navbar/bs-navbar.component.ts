@@ -28,6 +28,16 @@ export class BsNavbarComponent {
     wallet_balance: null
 };
 
+loginUser: User = {
+  username: null,
+  password: null,
+  firstName: null,
+  lastName: null,
+  email: '',
+  userImgSrc: null,
+  wallet_balance: null
+};
+
   constructor( public log: LoginService, public authService: AuthService,public register_service: RegisterService) {
   }
 
