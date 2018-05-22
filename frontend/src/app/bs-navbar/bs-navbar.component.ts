@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
 import { RegisterService } from '../register/register.service';
 import { Observable } from 'rxjs';
+declare var $: any;
 
 @Component({
   selector: 'bs-navbar',
@@ -45,9 +46,9 @@ loginUser: User = {
     console.log(newUser);
     this.errorMessage = "";
     this.log.login(newUser).subscribe((user) => {
-      console.log(user);
-      this.user = user;
+      //this.user = user;
       this.authService.login(newUser);
+      $("#myModal").modal("hide");
     }, (err) => {
       console.log("=============" + err);
       this.errorMessage = "Invalid Login Credentials...";
@@ -59,9 +60,13 @@ loginUser: User = {
 
   saveUser(newUser: User) {
     this.register_service.saveUserIntoDB(newUser);
+    this.authService.login(newUser);
+    $("#myModal").modal("hide");
   }
 
-  logout() {
+  logout(user,loginUser) {
+    console.log(user);
+    console.log(loginUser);
     this.authService.logout();
   }
 
