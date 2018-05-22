@@ -8,6 +8,8 @@ declare var $: any;
 @Injectable()
 export class LoginService {
 
+    user$: Observable<User>;
+
     constructor(
         private http: Http,
         private authService: AuthService) { }
