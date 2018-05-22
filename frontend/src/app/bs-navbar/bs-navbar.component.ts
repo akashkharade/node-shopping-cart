@@ -15,6 +15,7 @@ export class BsNavbarComponent {
 
   returnUrl: string;
   error:string;
+  errorMessage:string;
   
 
   user: User = {
@@ -32,14 +33,14 @@ export class BsNavbarComponent {
 
   login(newUser: User) {
     console.log(newUser);
-    this.log.login(newUser);
-    //this.auth.login(newUser)
-    /*this.router.navigate(["products"])
-    .catch(
-      (reason) => {
-        console.log("reason", reason);
-      }
-    );*/
+    this.errorMessage = "";
+    this.log.login(newUser).subscribe((user) => {
+      console.log(user);
+      this.user = user;
+    }, (err) => {
+      console.log("=============" + err);
+      this.errorMessage = "Invalid Login Credentials...";
+    });
   }
 
 
