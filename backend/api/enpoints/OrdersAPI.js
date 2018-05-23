@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 /* const User = mongoose.model('users'); */
-var User=require('../.././model/User');
+const User = require('../.././model/User');
 
 module.exports = app => {
     
@@ -35,18 +35,36 @@ module.exports = app => {
             });
     });
 
-    app.get('/api/user/:userId/orders', (req,res) => {
+    app.get('/api/getAllUsers', async (req,res) => {
+        User.find()
+        .exec((err, user) => {
+            console.log(user);
+            res.json(user);
+        });
+    })
+
+    app.get('/api/user/:userId/orders', async (req,res) => {
        const userId = req.params.userId;
-       User
-            .findById(userId)
-            .select('orders')
+       console.log("userid " + userId);
+       User.findById(userId)
             .exec((err, user) => {
-                res.json(user.orders);
-            });
-        
+                if(err) {
+                    console.log(err);
+                    res.status(500)
+                    .json({"message"  : "something bad happened"});
+                }
+                if(!user){
+                    res.status(404)
+                       .json({"message"  : "User does not exits"});
+                }else{
+                    res.json(user.orders);
+                }
+            })
     });
 
+
     var _addUserOrder = function(req, res, user){
+        console.log(user);
         var availavleUserBalance = user.wallet_balance;
         var totalCartPrice = req.body.total_price;
         if(availavleUserBalance >= req.body.total_price){
@@ -61,7 +79,6 @@ module.exports = app => {
         user.orders.push({
             'total_price' : totalCartPrice,
             'status' : req.body.status,
-            'products': req.body.products,
             'address' : req.body.address
         });
 
@@ -77,25 +94,32 @@ module.exports = app => {
     }
 
     app.post('/api/user/:userId/orders', (req,res) => {
+        console.log('post called');
         const userId = req.params.userId;
+        if(!userId) {
+            res.status(404)
+                 .json({
+                    "message"  : "User does not exits"
+                 });
+        }
         User
             .findById(userId)
-            .select('orders')
             .exec((err, user) => {
                 var response = {
                     status : 200,
                     message : []
                 }
-
                 if(err){
-                    response.status = 500;
-                    response.message = err;
+                    console.log(err);
+                    res.status(500)
+                    .json({"message"  : "something bad happened"});
                 }else if(! user){
-                    response.status = 400;
-                    response.message = 'User does not exits';
+                    res.status(404)
+                    .json({"message"  : "User does not exits"});
                 }else if(user){
                     _addUserOrder(req,res,user);
                 }
             });
     });
+
 }

@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
 import { RegisterService } from '../register/register.service';
 import { Observable } from 'rxjs';
+declare var $: any;
 
 @Component({
   selector: 'bs-navbar',
@@ -15,6 +16,7 @@ export class BsNavbarComponent {
 
   returnUrl: string;
   error:string;
+  errorMessage:string;
   
 
   user: User = {
@@ -27,28 +29,45 @@ export class BsNavbarComponent {
     wallet_balance: null
 };
 
-  constructor( public log: LoginService, public auth: AuthService,public register_service: RegisterService) {
+loginUser: User = {
+  username: null,
+  password: null,
+  firstName: null,
+  lastName: null,
+  email: '',
+  userImgSrc: null,
+  wallet_balance: null
+};
+
+  constructor( public log: LoginService, public authService: AuthService,public register_service: RegisterService) {
   }
 
   login(newUser: User) {
     console.log(newUser);
-    this.log.login(newUser);
-    //this.auth.login(newUser)
-    /*this.router.navigate(["products"])
-    .catch(
-      (reason) => {
-        console.log("reason", reason);
-      }
-    );*/
+    this.errorMessage = "";
+    this.log.login(newUser).subscribe((user) => {
+      //this.user = user;
+      this.authService.login(newUser);
+      $("#myModal").modal("hide");
+    }, (err) => {
+      console.log("=============" + err);
+      this.errorMessage = "Invalid Login Credentials...";
+      
+    });
+  
   }
 
 
   saveUser(newUser: User) {
     this.register_service.saveUserIntoDB(newUser);
+    this.authService.login(newUser);
+    $("#myModal").modal("hide");
   }
 
-  logout() {
-    this.auth.logout();
+  logout(user,loginUser) {
+    console.log(user);
+    console.log(loginUser);
+    this.authService.logout();
   }
 
 }

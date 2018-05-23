@@ -25,3 +25,12 @@ div#OR {
     z-index: 1;
     background: #DFDFDF;
 }
+
+.errorMessage{
+    color: red;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+.h4 {
+    text-align: left;
+}

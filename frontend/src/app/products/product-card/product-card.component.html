@@ -1,0 +1,9 @@
+<div class="card" style="width: 250px; height: 400px;">
+  <img class="card-img-top" [src]="product.imgName" alt="Card image cap" 
+  style="max-height: 250px;">
+  <div class="card-body" style="bottom: 0px; position: absolute;">
+    <h5 class="card-title">{{product.name | titlecase }}</h5>
+    <p class="card-text">{{product.price | currency:'INR': 'symbol' }}</p>
+    <a href="#" class="btn btn-primary">Buy</a>
+  </div>
+</div>

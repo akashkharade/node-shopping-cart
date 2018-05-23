@@ -13,8 +13,7 @@ export class ProductService {
     return '';//this.db.list('/products').push(product);
   }
 
-  getAll(): Observable<Product> {
-    //return this.db.list('/products');
+  getAll() {
     let BASE_URL:string = "http://localhost:5000";
     let catalog = this.http.get(BASE_URL+"/api/catalogs").map((res:Response) => res.json());
     console.log(catalog);
