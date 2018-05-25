@@ -64,10 +64,8 @@ loginUser: User = {
     $("#myModal").modal("hide");
   }
 
-  logout(user,loginUser) {
-    console.log(user);
-    console.log(loginUser);
-    this.authService.logout();
+  logout(userDetails: User) {
+    this.authService.logout(userDetails);
   }
 
 }
