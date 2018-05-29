@@ -132,7 +132,7 @@ module.exports = app => {
          
          res.status(200)
             .json({"message"  : "Mail Send Successfully"});
-     }
+     });
 
 
 }
