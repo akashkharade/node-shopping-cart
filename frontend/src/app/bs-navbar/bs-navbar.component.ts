@@ -26,7 +26,8 @@ export class BsNavbarComponent {
     lastName: null,
     email: '',
     userImgSrc: null,
-    wallet_balance: null
+    wallet_balance: null,
+    _id:null
 };
 
 loginUser: User = {
@@ -36,7 +37,8 @@ loginUser: User = {
   lastName: null,
   email: '',
   userImgSrc: null,
-  wallet_balance: null
+  wallet_balance: null,
+  _id:null
 };
 
   constructor( public log: LoginService, public authService: AuthService,public register_service: RegisterService) {

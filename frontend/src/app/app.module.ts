@@ -27,7 +27,8 @@ import { UserService } from './user.service';
 import { HttpModule } from '@angular/http';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
-
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -43,11 +44,13 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
     UserOrdersComponent,
     LoginComponent,
     ProductFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     FormsModule,
     //AngularFireModule.initializeApp(environment.firebase),
     //AngularFireDatabaseModule,
@@ -59,7 +62,8 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
       {path: 'register', component: RegisterComponent},
       {path: 'user-orders', component: UserOrdersComponent, canActivate: [AuthGuard]},
       {path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard]},
-      {path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard]}
+      {path: 'order-success', component: OrderSuccessComponent},
+      {path: 'product/:id' , component: ProductDetailsComponent},
     ]),
     NgbModule.forRoot()
   ],

@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AuthService {
 
-  user$: User;
+  public user$: User;
 
-  constructor( private route: ActivatedRoute,// private afAuth: AngularFireAuth
+  constructor( private route: ActivatedRoute
   ) {
     //this.user$ = afAuth.authState;
   }
@@ -19,7 +19,7 @@ export class AuthService {
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     localStorage.setItem('returnUrl', returnUrl);
 
-    this.user$ = user;
+    //this.user$ = user;
     console.log("************************"+ user.username);
     //this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }
@@ -28,6 +28,9 @@ export class AuthService {
     // added for log out
     this.user$ = null;
     //this.afAuth.auth.signOut();
+  }
+  checkIfUserisLoggedin(){
+    return this.user$ == null;
   }
 
 }

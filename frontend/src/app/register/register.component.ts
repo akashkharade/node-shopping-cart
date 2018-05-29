@@ -19,7 +19,8 @@ export class RegisterComponent implements OnInit {
     lastName: null,
     email: '',
     userImgSrc: null,
-    wallet_balance: null
+    wallet_balance: null,
+    _id:null
 };
 
 

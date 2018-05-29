@@ -1,7 +1,8 @@
 
-export interface Product {
+export class Product {
+  _id: string;
   name: string;
-  price: number;
+  price: string;
   category: string;
   imageName: string;
 }

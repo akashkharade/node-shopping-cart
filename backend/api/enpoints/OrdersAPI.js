@@ -65,21 +65,23 @@ module.exports = app => {
 
     var _addUserOrder = function(req, res, user){
         console.log(user);
-        var availavleUserBalance = user.wallet_balance;
-        var totalCartPrice = req.body.total_price;
-        if(availavleUserBalance >= req.body.total_price){
+        var availavleUserBalance = parseInt(user.wallet_balance);
+        var totalCartPrice = parseInt(req.body.total_price);
+        if(availavleUserBalance >= totalCartPrice){
             user.wallet_balance = availavleUserBalance - totalCartPrice;
         }else{
             res.status(401)
                  .json({
                     "message"  : "insufficient funds"
                  });
+				 return;
         }
         
         user.orders.push({
             'total_price' : totalCartPrice,
             'status' : req.body.status,
-            'address' : req.body.address
+            'address' : req.body.address,
+			'productId' : req.body.productId
         });
 
         user.save((err, userUpdated) => {
@@ -88,7 +90,7 @@ module.exports = app => {
                     .json(err);
             }else{
                 res.status(201)
-                    .json(userUpdated.orders[userUpdated.orders.length -1]);
+                    .json(userUpdated);
             }
         })
     }

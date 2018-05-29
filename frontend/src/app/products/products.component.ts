@@ -17,7 +17,7 @@ export class ProductsComponent {
 
   constructor(
   	route: ActivatedRoute,
-  	productService: ProductService) {
+  	private productService: ProductService) {
     productService.getAll().switchMap(products => {
       this.products = products;
       return route.queryParamMap;

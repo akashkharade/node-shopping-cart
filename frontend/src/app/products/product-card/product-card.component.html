@@ -4,6 +4,6 @@
   <div class="card-body" style="bottom: 0px; position: absolute;">
     <h5 class="card-title">{{product.name | titlecase }}</h5>
     <p class="card-text">{{product.price | currency:'INR': 'symbol' }}</p>
-    <a href="#" class="btn btn-primary">Buy</a>
+    <a [routerLink] = "['/product', product._id]" class="btn btn-primary" >Buy</a>
   </div>
 </div>

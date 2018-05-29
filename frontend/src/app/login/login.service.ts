@@ -23,7 +23,11 @@ export class LoginService {
         // authenticate user
         return this.http
             .post(this.loginServiceUrl, { username: newUser.username, password: newUser.password }, { headers: this.headers })
-            .map(res => res.json())
+            .map(res =>{
+                this.authService.user$ =  res.json().createdUser;  
+                console.log("login success ",this.authService.user$);
+              return this.authService.user$;
+            } )
           .catch(this.handleError);
 
         // calling auth service

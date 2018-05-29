@@ -41,7 +41,7 @@ router.post('/login', (req, res, next) => {
 	    		{
 	    		res.status(HttpStatus.OK).json({
 	    	        message: 'Handling POST requests to /login',
-	    	        createdUser: username
+	    	        createdUser: data
 	    	    });
 	    		}
 	    	else{

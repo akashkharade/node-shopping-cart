@@ -6,4 +6,5 @@ export class User{
     userImgSrc : String;
     email : String;
     wallet_balance : Number;
+    _id: string;
 }
