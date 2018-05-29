@@ -10,9 +10,9 @@ const productSchema = new Schema({
 });
 
 const orderSchema = new Schema({
-    quntity : { type : Number, default : 1},
+    quantity : { type : Number, default : 1},
     total_price : Number,
-    productId : Number
+    productId : String
 });
 
 const userSchema = new Schema({

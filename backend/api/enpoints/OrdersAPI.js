@@ -67,6 +67,7 @@ module.exports = app => {
         console.log(user);
         var availavleUserBalance = parseInt(user.wallet_balance);
         var totalCartPrice = parseInt(req.body.total_price);
+		console.log(availavleUserBalance+" -- "+totalCartPrice);
         if(availavleUserBalance >= totalCartPrice){
             user.wallet_balance = availavleUserBalance - totalCartPrice;
         }else{

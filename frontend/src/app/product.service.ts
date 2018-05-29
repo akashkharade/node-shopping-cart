@@ -38,8 +38,9 @@ export class ProductService {
     return this.getProductById(id);
   }
 
-  confirmOrder(userId: string, productId: string, productPrice: string, address: Address){   
-      let _body = {'total_price': '20', 'status': 'confirmed', 'address': JSON.stringify(address), 'productId': productId};
+  confirmOrder(userId: string, productId: string, productPrice: string, address: Address){
+      let _body = 'total_price='+productPrice+'&status=confirmed&address='+JSON.stringify(address)+'&productId='+productId;
+      //let _body = {'total_price': '20', 'status': 'confirmed', 'address': JSON.stringify(address), 'productId': productId};
 
       console.log(userId + "**********" + productId + "***********" + JSON.stringify(address) );
 
