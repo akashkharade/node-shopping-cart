@@ -123,5 +123,18 @@ module.exports = app => {
                 }
             });
     });
+	
+	
+	 app.post('/api/sendMail', (req,res) => {
+         var to = req.body.to;
+         var from = req.body.from;
+         var subject = req.body.subject;
+         
+         console.log(to + " " + from  + " " + subject);
+         
+         res.status(200)
+            .json({"message"  : "Mail Send Successfully"});
+     });
+
 
 }
