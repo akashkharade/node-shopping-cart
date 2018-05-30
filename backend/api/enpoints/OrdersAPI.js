@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 /* const User = mongoose.model('users'); */
 const User = require('../.././model/User');
+var nodemailer = require('nodemailer');
+var starttls=require('starttls');
 
 module.exports = app => {
     
@@ -126,16 +128,47 @@ module.exports = app => {
     });
 	
 	
-	 app.post('/api/sendMail', (req,res) => {
+app.post('/api/sendMail', (req,res) => {
          var to = req.body.to;
          var from = req.body.from;
          var subject = req.body.subject;
+		 var body= req.body.bodyText;
+		 
+		 var transporter = nodemailer.createTransport({
+         host: '172.21.74.17',
+         port: '25',
+         secure: false,
+         debug:true,
+         auth: {
+         user: 'no-reply@smtp.pidc.com',
+         pass: 'India1234',
+  },
+  tls: {
+        rejectUnauthorized: false
+    }
+});
+
+var mailOptions = {
+  from: from,
+  to: to,
+  subject: subject,
+  text: body
+  
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
+
+		 
          
          console.log(to + " " + from  + " " + subject);
          
          res.status(200)
             .json({"message"  : "Mail Send Successfully"});
-     });
-
-
+});
 }
