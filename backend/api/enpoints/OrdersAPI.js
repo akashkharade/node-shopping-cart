@@ -73,7 +73,7 @@ module.exports = app => {
         if(availavleUserBalance >= totalCartPrice){
             user.wallet_balance = availavleUserBalance - totalCartPrice;
         }else{
-            res.status(401)
+            res.status(500)
                  .json({
                     "message"  : "insufficient funds"
                  });
@@ -93,7 +93,9 @@ module.exports = app => {
                     .json(err);
             }else{
                 res.status(201)
-                    .json(userUpdated);
+                    .json({
+                    "message"  : "success"
+                 });
             }
         })
     }

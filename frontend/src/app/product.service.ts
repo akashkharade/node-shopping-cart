@@ -44,13 +44,29 @@ export class ProductService {
 
       console.log(userId + "**********" + productId + "***********" + JSON.stringify(address) );
 
-     return this.http.post(this.BASE_URL + "/api/user/" + userId + "/orders", _body , { headers: this.headers } )
-     .subscribe((res:Response) => {
-      if (res) {
-        console.log('resp $$$$$' + res);
-    }
-       })
+     return this.http.post(this.BASE_URL + "/api/user/" + userId + "/orders", _body , { headers: this.headers } );
  }
+
+  getData() {
+    return this.http.get('http://jsonplaceholder.typicode.com/posts/')
+        .map(this.extractData)
+        .catch(this.handleError);
+  }
+
+  private extractData(res:Response) {
+    let body = res.json();
+    return body || [];
+  }
+
+  private handleError1(error:any) {
+    // In a real world app, we might use a remote logging infrastructure
+    // We'd also dig deeper into the error to get a better message
+    let errMsg = (error.message) ? error.message :
+        error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    console.error(errMsg); // log to console instead
+    return Observable.throw(errMsg);
+  }
+
   get(productId) {
     return '';//this.db.object('/products/' + productId);
   }

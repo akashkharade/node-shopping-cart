@@ -55,7 +55,18 @@ export class ProductDetailsComponent implements OnInit {
     
     confirmOrder( newaddress: Address) {
 
-        return this.productService.confirmOrder( this.auth.user$._id , this.product._id, this.product.price, newaddress);
+        let res = this.productService.confirmOrder( this.auth.user$._id , this.product._id, this.product.price, newaddress)
+        .subscribe(
+            res => {
+              console.log(res);
+              alert("Success");
+            },
+            error => {
+                let errMsg = (error.message) ? error.message :
+                error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+                console.error("77777777777777"+errMsg); // log to console instead        
+            }
+          );
     }
 
     checkIfUserIsLoggedIn(): boolean {
