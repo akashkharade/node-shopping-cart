@@ -42,11 +42,11 @@
           <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs">
-              <li class="active">
-                <a href="#Login" data-toggle="tab">Login</a>
+              <li class="nav-item">
+                <a href="#Login" class="nav-link active" data-toggle="tab">Login</a>
               </li>
               <li>
-                <a href="#Registration" data-toggle="tab">Registration</a>
+                <a href="#Registration" class="nav-link" data-toggle="tab">Registration</a>
               </li>
             </ul>
             <!-- Tab panes -->
@@ -77,7 +77,7 @@
                     </div>
                     <div class="col-sm-10">
                       <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
-                      <a href="javascript:;">Forgot your password?</a>
+                    
                     </div>
                   </div>
                 </form>
