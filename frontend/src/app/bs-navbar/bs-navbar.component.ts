@@ -1,5 +1,6 @@
 import { AuthService } from '../auth.service';
 import { User } from '../models/user.model';
+import { Email } from '../models/email.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
@@ -39,6 +40,13 @@ loginUser: User = {
   userImgSrc: null,
   wallet_balance: null,
   _id:null
+};
+
+email: Email = {
+  to: null,
+  from: null,
+  subject: null,
+  bodyText: null
 };
 
   /**
@@ -101,6 +109,9 @@ loginUser: User = {
       console.log("Exception occured in saveUser().bs-navbar.component.ts file", err);
       this.errorMessage = "We have encountered a Systm Exception...";
     });
+
+    //sends email to registered user
+    this.registerService.sendRegistrationEmail(newUser,this.email);
   }
 
   /**
