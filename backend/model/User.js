@@ -24,8 +24,8 @@ const userSchema = new Schema({
     email : String,
     wallet_balance : Number,
     orders : [orderSchema],
-    address : String
-
+    address : String,
+    googleId : String
 });
 
 module.exports =  mongoose.model('User', userSchema);

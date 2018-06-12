@@ -2,15 +2,22 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const mongoose   = require('mongoose');
+const keys = require('./config/keys');
+//
+const apiRouterConfigure = require('./api/configRourer');
+
+//mlab connection'
+//mongoose.connect(keys.mongoURI);
 
 const mongdb = require('./db/mongDB');
-const apiRouterConfigure = require('./api/configRourer');
 var db = new mongdb();
 db.init();
 
 
 //register models
 require('./model/User');
+require('./services/passport');
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,6 +39,7 @@ app.use((req, res, next) => {
 // Routes which should handle requests
 apiRouterConfigure(app);
 require('./api/enpoints/OrdersAPI')(app);
+require('./routes/authRoutes')(app);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");
