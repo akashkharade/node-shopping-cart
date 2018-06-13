@@ -1,14 +1,19 @@
 const express = require("express");
+const passport = require('passport');
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose   = require('mongoose');
 const keys = require('./config/keys');
+const cookieSession = require('cookie-session');
+
 //
 const apiRouterConfigure = require('./api/configRourer');
 
 //mlab connection'
-//mongoose.connect(keys.mongoURI);
+// mongoose.connect(keys.mongoLocalURI)
+//         .then(() =>  console.log('connected to MongoDB'))
+//         .catch(err => console.log('could not connect to MongoDB', err));
 
 const mongdb = require('./db/mongDB');
 var db = new mongdb();
@@ -22,6 +27,12 @@ require('./services/passport');
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieSession({
+    maxAge : 30 * 24 * 60 * 60 * 1000,
+    keys : [keys.cookieKey]
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
