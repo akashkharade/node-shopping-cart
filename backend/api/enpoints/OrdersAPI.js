@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 /* const User = mongoose.model('users'); */
 const User = require('../.././model/User');
+const Order = require('../.././model/Order');
 var nodemailer = require('nodemailer');
 var starttls=require('starttls');
 
@@ -48,20 +49,15 @@ module.exports = app => {
     app.get('/api/user/:userId/orders', async (req,res) => {
        const userId = req.params.userId;
        console.log("userid " + userId);
-       User.findById(userId)
-            .exec((err, user) => {
-                if(err) {
-                    console.log(err);
-                    res.status(500)
-                    .json({"message"  : "something bad happened"});
-                }
-                if(!user){
-                    res.status(404)
-                       .json({"message"  : "User does not exits"});
-                }else{
-                    res.json(user.orders);
-                }
-            })
+        const userOrders 
+            = Order.find({'user' : userId})
+                .populate('product')
+                .exec(function (err, orders) {
+                    if (err){
+                        console.log(err);
+                    };
+                    res.status(200).json(orders)
+                });
     });
 
 
@@ -80,14 +76,15 @@ module.exports = app => {
 				 return;
         }
         
-        user.orders.push({
+        const order = new Order({
+            'user' : user._id,
             'total_price' : totalCartPrice,
             'status' : req.body.status,
             'address' : req.body.address,
-			'productId' : req.body.productId
+			'product' : req.body.productId
         });
 
-        user.save((err, userUpdated) => {
+        order.save((err, newlyCreatedOrder) => {
             if(err) {
                 res.status(500)
                     .json(err);

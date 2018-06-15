@@ -27,11 +27,11 @@ passport.use(new GoogleStrategy({
       done(null,existingUser);
     }else{
       const user = new User();
-      user.googleId = profile.id;
-      user.firstName = profile.name.givenName;
-      user.lastname = profile.name.familyName;
+      user.googleId = profile.id.trim();
+      user.firstName = profile.name.givenName.trim();
+      user.lastname = profile.name.familyName.trim();
       user.wallet_balance = keys.wallet_balance;
-      user.email = profile.emails[0].value;
+      user.email = profile.emails[0].value.trim();
       const createdUser = await user.save();
       done(null,createdUser);
     }  
