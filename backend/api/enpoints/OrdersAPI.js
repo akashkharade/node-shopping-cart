@@ -48,6 +48,9 @@ module.exports = app => {
 
     app.get('/api/user/:userId/orders', async (req,res) => {
        const userId = req.params.userId;
+       if(! mongoose.Types.ObjectId.isValid(userId)){
+            res.status(400).send('Invalid UserId');
+       }
        console.log("userid " + userId);
         const userOrders 
             = Order.find({'user' : userId})
@@ -98,8 +101,10 @@ module.exports = app => {
     }
 
     app.post('/api/user/:userId/orders', (req,res) => {
-        console.log('post called');
         const userId = req.params.userId;
+        if(! mongoose.Types.ObjectId.isValid(userId)){
+             res.status(400).send('Invalid UserId');
+        }
         if(!userId) {
             res.status(404)
                  .json({
