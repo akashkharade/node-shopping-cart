@@ -29,6 +29,7 @@ import { ProductFilterComponent } from './products/product-filter/product-filter
 import { ProductCardComponent } from './products/product-card/product-card.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { HttpClientModule } from '@angular/common/http';
+import { OrderService } from './order.service';
 
 
 
@@ -74,6 +75,7 @@ import { HttpClientModule } from '@angular/common/http';
     UserService,
     CategoryService,
     ProductService,
+    OrderService,
     RegisterService,
     LoginService
   ],

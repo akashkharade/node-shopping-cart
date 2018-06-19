@@ -34,18 +34,14 @@ export class ProductService {
         .catch(this.handleError)
   }
 
-  getProduct(id: number): Observable<Product> {
+  public getProduct(id: number): Observable<Product> {
     return this.getProductById(id);
   }
 
-  confirmOrder(userId: string, productId: string, productPrice: string, address: Address){
-      let _body = 'total_price='+productPrice+'&status=confirmed&address='+JSON.stringify(address)+'&productId='+productId;
-      //let _body = {'total_price': '20', 'status': 'confirmed', 'address': JSON.stringify(address), 'productId': productId};
-
-      console.log(userId + "**********" + productId + "***********" + JSON.stringify(address) );
-
-     return this.http.post(this.BASE_URL + "/api/user/" + userId + "/orders", _body , { headers: this.headers } );
- }
+  /*confirmOrder(userId: string, productId: string, productPrice: string, address: Address){
+    let _body = 'total_price='+productPrice+'&status=confirmed&address='+JSON.stringify(address)+'&productId='+productId;
+    return this.http.post(this.BASE_URL + "/api/user/" + userId + "/orders", _body , { headers: this.headers } );
+ }*/
 
   getData() {
     return this.http.get('http://jsonplaceholder.typicode.com/posts/')

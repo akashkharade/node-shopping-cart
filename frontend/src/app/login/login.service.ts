@@ -21,7 +21,7 @@ export class LoginService {
         console.log(newUser.username, newUser.password);
         
         // authenticate user
-        return this.http
+        return this.user$ = this.http
             .post(this.loginServiceUrl, { username: newUser.username, password: newUser.password }, { headers: this.headers })
             .map(res =>{
                 this.authService.user$ =  res.json().createdUser;  

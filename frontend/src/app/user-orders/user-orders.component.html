@@ -1,3 +1,24 @@
-<p>
-  user-orders works!
-</p>
+<h1>Orders</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th style="width: 100px"></th>
+      <th>Product</th>
+      <th style="width: 200px">Date</th>
+      <th style="width: 130px">Quantity</th>
+      <th style="width: 200px">Price</th>
+    </tr>
+  </thead> 
+  <tbody>
+    <tr *ngFor="let order of orders$ | async">
+      <td>
+        <div [style.backgroundImage]="'url(' + order.product.imgName + ')'" class="thumbnail">
+        </div>
+      </td>
+      <td class="orderRow">{{ order.product.name }}</td>
+      <td class="orderRow">{{ order.orderDate | date}}</td>
+      <td class="orderRow">{{ order.quantity }}</td>
+      <td class="orderRow">{{ order.total_price | currency:'INR': 'symbol' }}</td>
+    </tr>
+  </tbody> 
+</table>

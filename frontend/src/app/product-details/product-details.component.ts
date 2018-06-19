@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from "../auth.service";
 import { UserService } from "../user.service";
 import { User } from '../models/user.model';
+import { OrderService } from "../order.service";
 
 @Component({
     templateUrl:'./product-details.component.html'
@@ -34,6 +35,7 @@ export class ProductDetailsComponent implements OnInit {
     constructor(private route: ActivatedRoute, 
                 private router: Router,
                 private productService: ProductService,
+                private orderService: OrderService,
                 private auth: AuthService,
                 private userService: UserService) {
     }
@@ -55,16 +57,16 @@ export class ProductDetailsComponent implements OnInit {
     
     confirmOrder( newaddress: Address) {
 
-        let res = this.productService.confirmOrder( this.auth.user$._id , this.product._id, this.product.price, newaddress)
+        let res = this.orderService.placeOrder( this.auth.user$._id , this.product._id, this.product.price, newaddress)
         .subscribe(
             res => {
               console.log(res);
-              alert("Success");
+              this.router.navigate(['order-success']);
             },
             error => {
                 let errMsg = (error.message) ? error.message :
                 error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-                console.error("77777777777777"+errMsg); // log to console instead        
+                alert(errMsg); // log to console instead        
             }
           );
     }

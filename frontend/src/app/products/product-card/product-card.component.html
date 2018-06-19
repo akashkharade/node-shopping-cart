@@ -1,5 +1,7 @@
 <div class="card">
-  <img class="card-img-top" [src]="product.imgName" alt="Card image cap" >
+  <!--<img class="card-img-top" [src]="product.imgName" alt="Card image cap" >-->
+  <div [style.backgroundImage]="'url(' + product.imgName + ')'" class="cardImg">
+  </div>
   <div class="card-body">
     <h5 class="card-title">{{product.name | titlecase }}</h5>
     <p class="card-text">{{product.price | currency:'INR': 'symbol' }}</p>
