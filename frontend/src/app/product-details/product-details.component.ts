@@ -10,6 +10,8 @@ import { UserService } from "../user.service";
 import { User } from '../models/user.model';
 import { OrderService } from "../order.service";
 
+declare var $: any;
+
 @Component({
     templateUrl:'./product-details.component.html'
 })
@@ -26,17 +28,11 @@ export class ProductDetailsComponent implements OnInit {
     noWalletBalanceMEssage : string = 'You do not have sufficient Balance in your Wallet, please recharge and try again';
     loginMessage: string = "You need to login before you can purchase anything!";
     
-    address: Address = {
-        addressLine1 : null,
-        zipcode : null,
-        phoneNumber: null
-    };
-    
     constructor(private route: ActivatedRoute, 
                 private router: Router,
                 private productService: ProductService,
                 private orderService: OrderService,
-                private auth: AuthService,
+                private authService: AuthService,
                 private userService: UserService) {
     }
     
@@ -50,33 +46,15 @@ export class ProductDetailsComponent implements OnInit {
 
     getProduct(id: number){
         this.productService.getProduct(id).subscribe(
-            product => this.product = product,
+            product => {this.product = product; this.productService.setCartProduct(product)},
             error => this.errorMessage = <any> error);
            console.log(' product value is ' + this.product);
     }
     
-    confirmOrder( newaddress: Address) {
-
-        let res = this.orderService.placeOrder( this.auth.user$._id , this.product._id, this.product.price, newaddress)
-        .subscribe(
-            res => {
-              console.log(res);
-              this.router.navigate(['order-success']);
-            },
-            error => {
-                let errMsg = (error.message) ? error.message :
-                error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-                alert(errMsg); // log to console instead        
-            }
-          );
-    }
-
     checkIfUserIsLoggedIn(): boolean {
-        let checkLoginStatus =  this.auth.checkIfUserisLoggedin(); 
+        let checkLoginStatus =  this.authService.checkIfUserisLoggedin(); 
         return checkLoginStatus;
     }
-
-
 
     onBack(): void {
         this.router.navigate(['/products']);
@@ -84,6 +62,10 @@ export class ProductDetailsComponent implements OnInit {
 
     ngOnDestroy() {
         this.sub.unsubscribe();
+    }
+
+    onBuyClick() {
+        $("#loginModal").modal("hide");
     }
 
 }

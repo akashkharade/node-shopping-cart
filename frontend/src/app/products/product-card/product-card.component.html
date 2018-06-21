@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" (click)="onCardClick()">
   <!--<img class="card-img-top" [src]="product.imgName" alt="Card image cap" >-->
   <div [style.backgroundImage]="'url(' + product.imgName + ')'" class="cardImg">
   </div>
@@ -6,7 +6,7 @@
     <h5 class="card-title">{{product.name | titlecase }}</h5>
     <p class="card-text">{{product.price | currency:'INR': 'symbol' }}</p>
   </div>
-  <div class="card-footer">
+  <!--<div class="card-footer">
     <a [routerLink] = "['/product', product._id]" class="btn btn-secondary btn-block" >Buy</a>
-  </div>
+  </div>-->
 </div>

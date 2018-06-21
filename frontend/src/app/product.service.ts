@@ -13,11 +13,17 @@ export class ProductService {
 
   constructor(private http:Http) { }
 
+  private product: Product;
+
   public BASE_URL: string = "http://localhost:5000";
   private headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
   
-  create(product) {
-    return '';//this.db.list('/products').push(product);
+  setCartProduct(product:Product) {
+    this.product = product;
+  }
+
+  getCartProduct() {
+    return this.product;
   }
 
   getAll() {
@@ -80,5 +86,5 @@ export class ProductService {
     // instead of just logging it to the console
     console.error(error);
     return Observable.throw(error.json().error || 'Server error');
-}
+  }
 }
