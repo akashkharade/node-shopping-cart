@@ -31,3 +31,8 @@ div#OR {
 .h4 {
     text-align: left;
 }
+
+.navbar-header{
+    margin-left:995px;
+    widows: 100%;
+  }
