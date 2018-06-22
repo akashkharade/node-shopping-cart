@@ -1,12 +1,24 @@
 .dropdown-toggle {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .h4 {
     text-align: left;
 }
 
-.navbar-header{
-    margin-left:995px;
-    widows: 100%;
-  }
+.nav-link{
+    color: white !important;
+}
+
+.navbar, .navbar-brand {
+    background-color: #0095cd !important;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+}
+
+.dropdown-menu-right {
+    right: 0;
+    left: auto !important;
+}
+
