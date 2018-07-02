@@ -15,7 +15,7 @@ declare var $: any;
   templateUrl: './bs-navbar.component.html',
   styleUrls: ['./bs-navbar.component.css']
 })
-export class BsNavbarComponent {
+export class BsNavbarComponent implements OnInit {
 
   public errorMessage: string = ""; // to display the error message
   
@@ -48,6 +48,12 @@ email: Email = {
   subject: null,
   bodyText: null
 };
+
+  ngOnInit(): void {
+    
+    // check if user is logged in or not
+    this.authService.checkIfUserLoggedIn();    
+  }
 
   /**
    * Gets the instance.
