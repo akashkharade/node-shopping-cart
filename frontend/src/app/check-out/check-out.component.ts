@@ -38,6 +38,7 @@ export class CheckOutComponent implements OnInit {
             alert(errMsg); // log to console instead        
         }
       );
+      this.orderService.sendOrderConfirmationEmail(this.auth.user$.email);
   }
 
 

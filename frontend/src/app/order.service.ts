@@ -6,6 +6,7 @@ import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Order } from './models/order';
 import { Product } from './models/product';
+import { Email } from './models/email.model'
 
 @Injectable()
 export class OrderService {
@@ -13,7 +14,10 @@ export class OrderService {
   constructor(private http:Http, private productService: ProductService) { }
   public BASE_URL: string = "http://localhost:5000";
   private headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-
+  private emailUrl='http://localhost:5000/api/sendMail';
+  emailFrom: string = 'no-reply@smtp.pidc.com';
+  emailSubject: string = 'Order Confirmed';
+  emailBody: string = 'Hello Nessian, your order is successfully placed and will be delievered in 2-4 business days! Thankyou for shopping with us :)';
  
   placeOrder(userId: string, productId: string, productPrice: string, address: Address){
     let _body = 'total_price='+productPrice+'&status=confirmed&address='+JSON.stringify(address)+'&productId='+productId;
@@ -43,4 +47,18 @@ export class OrderService {
       return product;
     });
   }
+
+  sendOrderConfirmationEmail(email: String){
+    let _body = 'to='+email+'&from='+this.emailFrom+'&subject='+this.emailSubject+'&bodyText='+this.emailBody;
+    return this.http
+        .post(this.emailUrl, _body, { headers: this.headers })
+        .toPromise()
+        .then(res => res.json().data as Email)
+        .catch(this.handleError);
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error);
+    return Promise.reject(error.message || error);
+}
 }
