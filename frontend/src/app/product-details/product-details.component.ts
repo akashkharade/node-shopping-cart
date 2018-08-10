@@ -68,4 +68,8 @@ export class ProductDetailsComponent implements OnInit {
         $("#loginModal").modal("hide");
     }
 
+    getProuductDescriptions(): string[] {
+        return this.product.describtion.split(";")
+    }
+
 }

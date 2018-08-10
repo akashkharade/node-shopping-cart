@@ -1,9 +1,8 @@
 <div class="card" (click)="onCardClick()">
-  <!--<img class="card-img-top" [src]="product.imgName" alt="Card image cap" >-->
-  <div [style.backgroundImage]="'url(' + product.imgName + ')'" class="cardImg">
-  </div>
+  <img *ngIf="product.imgName" class="card-img-top cardImg" [src]="product.imgName.split(';')[0]" alt="{{ product.title }}">
+
   <div class="card-body">
-    <h5 class="card-title">{{product.name | titlecase }}</h5>
+    <h5 class="card-title" style="margin-bottom: 5px">{{product.name | titlecase }}</h5>
     <p class="card-text">{{product.price | currency:'INR': 'symbol' }}</p>
   </div>
   <!--<div class="card-footer">

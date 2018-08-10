@@ -30,6 +30,7 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { OrderService } from './order.service';
+import { ProductCarouselComponent } from './products/product-carousel/product-carousel.component';
 
 
 
@@ -46,7 +47,8 @@ import { OrderService } from './order.service';
     LoginComponent,
     ProductFilterComponent,
     ProductCardComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    ProductCarouselComponent
   ],
   imports: [
     BrowserModule,

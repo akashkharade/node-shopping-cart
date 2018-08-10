@@ -1,34 +1,35 @@
 <div class="container" *ngIf='product'>
         <div class="row">
                 <div class="row">
-                        <div>
-                                <img src="{{product.imgName}}" style="width:500px">
-                        </div>
+                        <!--<div>
+                               <img src="{{product.imgName}}" style="width:500px">
+                        </div>-->
+                        <product-carousel [productImages]="product.imgName.split(';')" style="width:500px"></product-carousel>
                 </div>
                 <div class="col">
                         <div class="col">
                                 <h5 >{{product.name}}</h5>
                         </div>
                         <hr>
-                        <div class="col">
+                        <div class="col" style="padding-bottom: 30px">
                                         <span>MRP:</span>
                                 <span>{{product.price | currency:'INR': 'symbol' }}</span>
                         </div>
-                        <!--<div class="col" style="padding-top: 60px">
-                                <a [routerLink] = "['/check-out']" class="btn btn-primary" >Buy</a>
-                        </div>-->
+                        <div class="col">
+                                <div *ngFor="let description of getProuductDescriptions()">
+                                        <span >{{description}}</span>
+                                </div>
+                        </div>
                         <ng-template #anonymousUser>
-                                <div class="col" style="padding-top: 60px">
+                                <div class="col" style="padding-top: 30px">
                                         <a [routerLink] = "['/check-out']" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
                                                 Login to Buy</a>
                                 </div>
                         </ng-template>
-                        <div *ngIf="authService.user$ as user; else anonymousUser" class="col" style="padding-top: 60px">
+                        <div *ngIf="authService.user$ as user; else anonymousUser" class="col" style="padding-top: 30px">
                                 <a [routerLink] = "['/check-out']" class="btn btn-primary" >Buy</a>
                         </div>
                                                         
                 </div>
         </div>
 </div>
-
-<login></login>

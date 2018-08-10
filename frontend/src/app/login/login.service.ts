@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { User } from '../models/user.model'
 import { Headers, Http } from '@angular/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from "../auth.service";
 import { Observable } from 'rxjs';
 declare var $: any;
@@ -12,7 +12,8 @@ export class LoginService {
 
     constructor(
         private http: Http,
-        private authService: AuthService) { }
+        private authService: AuthService,
+        private router: Router) { }
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private loginServiceUrl = 'http://localhost:5000/api/users/login';
@@ -36,6 +37,17 @@ export class LoginService {
     private handleError(error: any) { 
         let errMsg = (error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         return Observable.throw(error);
-      }
+    }
+    
+    /**
+    * This functions logouts the user from the application.
+    * 
+    * @param userDetails 
+    */
+    public logout(userDetails: User): void {
 
+        // log out user from the application
+        this.authService.logout(userDetails);
+        this.router.navigate(['/']);
+    }
 }

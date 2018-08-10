@@ -12,7 +12,7 @@
   <tbody>
     <tr *ngFor="let order of orders$ | async">
       <td>
-        <div [style.backgroundImage]="'url(' + order.product.imgName + ')'" class="thumbnail">
+        <div [style.backgroundImage]="'url(' + order.product.imgName.split(';')[0] + ')'" class="thumbnail">
         </div>
       </td>
       <td class="orderRow">{{ order.product.name }}</td>

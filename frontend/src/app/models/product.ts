@@ -1,3 +1,4 @@
+import { Description } from "./description";
 
 export class Product {
   _id: string;
@@ -5,4 +6,5 @@ export class Product {
   price: string;
   category: string;
   imageName: string;
+  describtion: string;
 }

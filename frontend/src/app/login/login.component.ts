@@ -5,7 +5,7 @@ import { Email } from '../models/email.model';
 import { RegisterService } from '../register/register.service';
 import { LoginService } from './login.service';
 import { Constants } from '../models/constants';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 //import { AngularFireAuth } from 'angularfire2/auth';
 
 declare var $: any;
@@ -113,17 +113,6 @@ email: Email = {
 
     // set in local storage
     localStorage.setItem(Constants.RETURN_URL, returnUrl);
-  }
-
-  /**
-   * This functions logouts the user from the application.
-   * 
-   * @param userDetails 
-   */
-  public logout(userDetails: User): void {
-
-    // log out user from the application
-    this.authService.logout(userDetails);
   }
 
 }
